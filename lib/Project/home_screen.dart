@@ -28,12 +28,12 @@ class _myhomeState extends State<myhome> {
     });
   }
 
-  @override
+   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     getuserdata();
-      filteredlist = List.from(mainlist!);
+      // filteredlist = List.from(mainlist!);
   }
 
   List<DocumentSnapshot>? mainlist = [];
@@ -53,26 +53,26 @@ class _myhomeState extends State<myhome> {
 
     print(keyword);
   }
-
+ 
   @override
   Widget build(BuildContext context) {
     CollectionReference myuser = FirebaseFirestore.instance.collection('users');
     return Scaffold(
-      // backgroundColor: Colors.white,
+      backgroundColor: Colors.grey[300],
       appBar: AppBar(
         title: Text('Hi! $username'),
         backgroundColor: Colors.blue,
         actions: [
-          IconButton(
-              onPressed: () {
-                Get.changeTheme(ThemeData.dark());
-              },
-              icon: Icon(Icons.change_circle)),
-          IconButton(
-              onPressed: () {
-                Get.changeTheme(ThemeData.light());
-              },
-              icon: Icon(Icons.change_circle_outlined)),
+          // IconButton(
+          //     onPressed: () {
+          //       Get.changeTheme(ThemeData.dark());
+          //     },
+          //     icon: Icon(Icons.change_circle)),
+          // IconButton(
+          //     onPressed: () {
+          //       Get.changeTheme(ThemeData.light());
+          //     },
+          //     icon: Icon(Icons.change_circle_outlined)),
           PopupMenuButton(
               icon: Icon(Icons.more_vert),
               color: Colors.teal,
@@ -151,13 +151,13 @@ class _myhomeState extends State<myhome> {
                                       },
                                       leading:    CircleAvatar(
                                         radius: 50,
-                                          child: Icon(Icons.person,size: 40,),
+                                          child: Text(filteredlist![index]['username'][0].toUpperCase()),
                                         ), 
                                         title:Text( '${filteredlist![index]['username']}', style: TextStyle(
                                                 fontSize: 20,
                                                 fontWeight: FontWeight.w800),) ,
                                         trailing: Text('Yesterday'),
-                                    subtitle: Text('Messages'),
+                                    subtitle: Text('main'),
                                     
                                     
                                    

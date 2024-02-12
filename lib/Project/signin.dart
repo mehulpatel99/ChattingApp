@@ -1,6 +1,6 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebaseproject/Project/MyCustomButton.dart';
+// import 'package:firebaseproject/Project/MyCustomButton.dart';
 import 'package:firebaseproject/Project/MyTextField.dart';
 import 'package:firebaseproject/Project/forgot_pass.dart';
 import 'package:firebaseproject/Project/home_screen.dart';
@@ -16,7 +16,7 @@ class SignIN extends StatefulWidget {
 }
 
 class _SignINState extends State<SignIN> {
-  TextEditingController _usernameController = TextEditingController();
+  // TextEditingController _usernameController = TextEditingController();
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
  
