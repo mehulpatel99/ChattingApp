@@ -15,6 +15,13 @@ class myhome extends StatefulWidget {
 }
 
 class _myhomeState extends State<myhome> {
+  bool isvisible=true;
+  // var imagefetch = '';
+
+
+
+
+
   String? username = '';
   String? e_mail = '';
   void getuserdata() async {
@@ -25,6 +32,7 @@ class _myhomeState extends State<myhome> {
     setState(() {
       username = doccument['username'];
       e_mail = doccument['email'];
+      // imagefetch = doccument['profilepic'];
     });
   }
 
@@ -36,8 +44,8 @@ class _myhomeState extends State<myhome> {
       // filteredlist = List.from(mainlist!);
   }
 
-  List<DocumentSnapshot>? mainlist = [];
-  List<DocumentSnapshot>? filteredlist = [];
+  List<DocumentSnapshot>? mainlist ;
+  List<DocumentSnapshot>? filteredlist ;
   void searchdata(String? keyword) async {
     setState(() {
       if (keyword!.isEmpty) {
@@ -54,14 +62,16 @@ class _myhomeState extends State<myhome> {
     print(keyword);
   }
  
+ 
   @override
   Widget build(BuildContext context) {
     CollectionReference myuser = FirebaseFirestore.instance.collection('users');
     return Scaffold(
-      backgroundColor: Colors.grey[300],
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text('Hi! $username'),
-        backgroundColor: Colors.blue,
+        leading: Icon(Icons.person,color: Colors.white,),
+        title: Text('Hi! $username',style: TextStyle(color: Colors.white),),
+        backgroundColor: Color.fromARGB(255, 11, 123, 74),
         actions: [
           // IconButton(
           //     onPressed: () {
@@ -74,8 +84,8 @@ class _myhomeState extends State<myhome> {
           //     },
           //     icon: Icon(Icons.change_circle_outlined)),
           PopupMenuButton(
-              icon: Icon(Icons.more_vert),
-              color: Colors.teal,
+              icon: Icon(Icons.more_vert,color: Colors.white,),
+              color: const Color.fromARGB(255, 137, 232, 223),
               onSelected: (value) {
                 if (value == "Profile") {
                   Navigator.push(
@@ -130,47 +140,50 @@ class _myhomeState extends State<myhome> {
                       return ListView.builder(
                           itemCount: filteredlist!.length,
                           itemBuilder: (context, index) {
-                            return Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 10, right: 10, top: 15),
-                              child: Container(
-                                decoration: BoxDecoration(color: Colors.white,boxShadow: [
-                                  BoxShadow(
-                                      color: Colors.black,
-                                      offset: Offset(3, 3),
-                                      blurRadius: 3)
-                                ]),
+                            return
+                            // return Padding(
+                            //   padding: const EdgeInsets.only(
+                            //       left: 10, right: 10, top: 15),
+                            //   child: Container(
+                            //     decoration: BoxDecoration(color: Colors.white,boxShadow: [
+                            //       BoxShadow(
+                            //           color: Colors.black,
+                            //           offset: Offset(3, 3),
+                            //           blurRadius: 3)
+                            //     ]),
                                
                                   //  elevation: 10,
                                   // color: Colors.white,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(12.0),
+                                   Padding(
+                                    padding: const EdgeInsets.all(4.0),
                                     child: ListTile(
                                       onTap: () {
                                         Navigator.push(context,MaterialPageRoute(builder: (context)=>ChatScreen(userdocumentsnapshot: filteredlist![index])));
                                       },
                                       leading:    CircleAvatar(
                                         radius: 50,
-                                          child: Text(filteredlist![index]['username'][0].toUpperCase()),
+                                        backgroundImage: NetworkImage(filteredlist?[index]['profilepic']),
+                                          
                                         ), 
                                         title:Text( '${filteredlist![index]['username']}', style: TextStyle(
                                                 fontSize: 20,
                                                 fontWeight: FontWeight.w800),) ,
                                         trailing: Text('Yesterday'),
-                                    subtitle: Text('main'),
+                                    subtitle: Text('messages'),
                                     
                                     
                                    
                                   ),
-                                ),
-                              ),
-                            );
+                                );
+                            //   ),
+                            // );
                           });
                     }
                     return Center(child: CircularProgressIndicator());
                   }))
         ],
       ),
+     floatingActionButton: FloatingActionButton(backgroundColor: Color.fromARGB(255, 11, 123, 74),onPressed: (){},child: Icon(Icons.sms,color: Colors.white,)),
     );
   }
 }

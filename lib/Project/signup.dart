@@ -18,7 +18,7 @@ class _SignUpState extends State<SignUp> {
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
   String? profilePicUrl =
-      "https://cdn3d.iconscout.com/3d/premium/thumb/profile-8260859-6581822.png?f=webp";
+      "https://www.shutterstock.com/image-vector/vector-flat-illustration-grayscale-avatar-600nw-2264922221.jpg";
 
   Future<void> registerUser(
       String? username, String? email, String? password) async {

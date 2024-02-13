@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class ChatScreen extends StatefulWidget {
   DocumentSnapshot userdocumentsnapshot;
@@ -67,9 +68,9 @@ class _ChatScreenState extends State<ChatScreen> {
                   '${widget.userdocumentsnapshot['username']}',
                   style: TextStyle(fontSize: 25, color: Colors.white),
                 ),
-                leading: CircleAvatar(
-                  child: Icon(Icons.person),
-                ),
+                leading:  CircleAvatar(
+                                        // backgroundColor: Colors.grey[500],
+                                      backgroundImage: NetworkImage(widget.userdocumentsnapshot['profilepic']),),
                 subtitle: Text(
                   'offline',
                   style: TextStyle(color: Colors.white),
@@ -130,8 +131,9 @@ class _ChatScreenState extends State<ChatScreen> {
                                    Row(
                                     children: [
                                       CircleAvatar(
-                                        backgroundColor: Colors.grey[500],
-                                        child: Text(widget.userdocumentsnapshot['username'][0].toUpperCase()),),
+                                        // backgroundColor: Colors.grey[500],
+                                      backgroundImage: NetworkImage(widget.userdocumentsnapshot['profilepic']),)
+                                        // child: Text(widget.userdocumentsnapshot['username'][0].toUpperCase()),),
                                         
                                     ],
                                    )else
@@ -142,8 +144,14 @@ class _ChatScreenState extends State<ChatScreen> {
                                     decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),color: IsCurrentUser? Color.fromARGB(255, 186, 245, 188):Colors.white),
                                     child: Padding(
                                       padding: const EdgeInsets.all(12.0),
-                                      child: Text(message['Message'],style: TextStyle(color: Colors.black,fontSize: 15
-                                      ),),
+                                      child: Row(
+                                        children: [
+                                          Text(message['Message'],style: TextStyle(color: Colors.black,fontSize: 15
+                                          ),),
+                                          SizedBox(width: 10,),
+                                          Text(DateFormat('HH:mm a').format(message['Timestamp'].toDate()),style: TextStyle(fontSize: 10),),
+                                        ],
+                                      ),
                                     )),
                                   ],
                                 ),

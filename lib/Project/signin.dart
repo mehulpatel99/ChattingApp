@@ -6,6 +6,7 @@ import 'package:firebaseproject/Project/forgot_pass.dart';
 import 'package:firebaseproject/Project/home_screen.dart';
 import 'package:firebaseproject/Project/signup.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 
 class SignIN extends StatefulWidget {
@@ -33,7 +34,8 @@ class _SignINState extends State<SignIN> {
   User? user = usercredential.user;
   Navigator.pushReplacement(context, MaterialPageRoute(builder: (conntext)=>myhome(users: user,)));
   }catch(e){
-      myshowSnackBar();
+      // myshowSnackBar();
+      Get.snackbar('Invalid', 'Password or Email wrong');
   }
  
  }
